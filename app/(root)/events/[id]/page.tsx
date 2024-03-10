@@ -1,11 +1,11 @@
-import { getEventsById } from "@/lib/actions/event.actions"
+import { getEventById } from "@/lib/actions/event.actions"
 import { formatDateTime } from "@/lib/utils"
 import { SearchParamProps } from "@/types"
 import Image from "next/image"
 
 
 const EventDetails = async ({ params: { id }}: SearchParamProps) => {
-    const event = await getEventsById(id)
+    const event = await getEventById(id)
 
     console.log(event)
 
@@ -56,6 +56,17 @@ const EventDetails = async ({ params: { id }}: SearchParamProps) => {
                                 <p className="ml-1">{formatDateTime(event.endDateTime).dateOnly} || {formatDateTime(event.endDateTime).timeOnly}</p>                                
                             </div>
                         </div>
+
+                        <div className="p-regular-20 flex items-center gap-3 ">
+                            <Image src='/assets/icons/location.svg' alt="location" width={32} height={32} />
+                            <p className="p-medium-16 lg:p-regular-20">{event.location}</p>
+                        </div>                        
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                        <p className="p-bold-20 text-grey-600">What you'll learn</p>
+                        <p className="p-medium-16 lg:p-regular-18">{event.description}</p>
+                        <p className="p-medium-16 lg:p-regular-18 truncate text-primary-500 underline">{event.url}</p>
                     </div>
                 </div>
             </div>
